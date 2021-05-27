@@ -28,6 +28,6 @@ console.log(Object.entries(accum).filter(([key, value]) => {
     }
 }));
 
-
+./
 
 console.log(accum); // [ 1, 2, 3, 4, 5, 9 ]
