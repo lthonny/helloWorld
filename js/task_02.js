@@ -8,9 +8,9 @@ function transformString(arr) {
   let counter = 1; // счетчик
 
   for (i = 1; i < arrString.length; i++) {
-    if(arrString[i] === letter) { // если, первый элемент массива [1] ===
+    if(arrString[i] === letter) { // если, первый элемент массива повторяется, то наращиваем счетчик
       counter += 1; // 2
-    } else {
+    } else { // если счетчик не повторяется, то складываем с + б + 2
       stringСonversion +=  letter + counter; // строка + буква + количество 'a+a+2' 
       counter = 1;
       letter = arrString[i];
@@ -20,6 +20,7 @@ function transformString(arr) {
   stringСonversion += letter + counter;
   return stringСonversion;
 }
+
 
 console.log(transformString('aaabbdcccccf'));
 console.log(transformString('aabbaa'));
