@@ -1,54 +1,31 @@
 // 3. В последовательности записаны целые числа от 1 до N в произвольном порядке, но одно из чисел 
 // пропущено (остальные встречаются ровно по одному разу). N заранее неизвестно. Определить пропущенное число.
 
-const incompleteArray = [1, 2, 3, 4, 5, 6, 8]; // массив с недостающим числом
-const newArr = [];
+function getMissedNumber(input) {
+    const incompleteArrayLength = input.length; // length not complete arr
+    const completeArrayLenght = incompleteArrayLength + 1; // length full arr
+    const completeArray = Array.from(Array(completeArrayLenght), (_, i) => i + 1); // arr [1.........N]
 
-function getMissedNumber(input){
-    const incompleteArrayLength = input.length;
-    const completeArrayLenght = incompleteArrayLength + 1; // длина массива
-    const completeArray = Array.from(Array(completeArrayLenght), (_, i) => i + 1); // массив N
-
-    completeArray.forEach(element => {
-        if (input.indexOf(element)) {
-            console.log(element);
+    for (let i = 0; i < completeArray.length; i++){
+        if (input.indexOf(completeArray[i]) == -1) { 
+            return completeArray[i]; // arr [i] != full arr
         }
-    });
-
-
-    // const result = input.filter(e => completeArray.indexOf(e) !== -1).length === completeArray.length;
-    // console.log(result)
-
-
-
-    // console.log(completeArray);
-    return;
+    } 
 }
 
-getMissedNumber(incompleteArray);
+// test cases
+const testCases = [
+    { input: [1, 2, 3, 4, 5, 6, 8] },
+    { input: [8, 7, 6, 5, 4, 2, 1] },
+    { input: [1, 7, 10, 3, 4, 5, 6, 8] },
+    { input: [1, 2, 3, 4, 5, 6, 9, 8, 10] },
+    { input: [12, 10, 8, 9, 6, 7, 5, 4, 3, 2, 1] },
+];
 
-
-// function diff(aString, nString) {
-//     if (aString !== nString) {
-//         aString.forEach(element => {
-//             console.log(element);
-//         });
-//     }
-    
-
-// }
-
-
-// function diff(aString, nString) {
-//     return aString.filter(i => !nString.includes(i))
-//     .concat(nString.filter(i => !aString.includes(i)))
-// }
-
-
-
-// console.log(diff(incompleteArray, fullArray));
-
-// ...........................
-
-
-
+testCases.forEach((testCase) => {
+    const {input} = testCase;
+    const missedNumber = getMissedNumber(input);
+    console.log(`
+        input: ${input} test result: ${missedNumber}
+    `);
+})
