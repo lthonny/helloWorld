@@ -16,6 +16,9 @@
 // [“2 : 2”, “2 : 2”] => 2
 // [“3 : 2”, “3 : 2”] => 2
 
+
+// I love football после, такой задачи я полюбил футбол
+
 const score = ['5 : 4', '1 : 1'];
 
 function calculatePrize(input) { // ['2 : 1', '5 : 1']
@@ -57,6 +60,4 @@ function getGameResult(score) { // узнаем какая команда выи
     }
 }
 
-// console.log(getGameResult('2 : 1'));
-// console.log(getGameResult('2 : 2'));
 
