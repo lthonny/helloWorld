@@ -19,25 +19,28 @@
 
 // I love football после, такой задачи я полюбил футбол
 
-const score = ['5 : 4', '1 : 1'];
+const score = ['3 : 1', '1 : 2'];
 
 function calculatePrize(input) { // ['2 : 1', '5 : 1']
     const supposedScore = input[0]; // '2 : 1' 2-A
     const realScore = input[1]; // '5 : 1'
 
+    const supposedScoreGameResult = getGameResult(supposedScore);
+    const realScoreGameResult = getGameResult(realScore)
+
     if (supposedScore == realScore) {
         return 2;
-    } else if (getGameResult(supposedScore) == 'B' && getGameResult(realScore) == 'A')  {
+    } else if (supposedScoreGameResult === 'B' && realScoreGameResult === 'A')  {
         return 0;
-    } else if (getGameResult(supposedScore) == 'A' && getGameResult(realScore) == 'B')  {
+    } else if (supposedScoreGameResult === 'A' && realScoreGameResult === 'B')  {
         return 0;
-    } else if (getGameResult(supposedScore) == 'A' && getGameResult(realScore) == 'D')  {
+    } else if (supposedScoreGameResult === 'A' && realScoreGameResult === 'D')  {
         return 0;
-    } else if (getGameResult(supposedScore) == 'B' && getGameResult(realScore) == 'B')  {
+    } else if (supposedScoreGameResult === 'B' && realScoreGameResult === 'B')  {
         return 1;
-    } else if (getGameResult(supposedScore) == 'A' && getGameResult(realScore) == 'A')  {
+    } else if (supposedScoreGameResult === 'A' && realScoreGameResult ==='A')  {
         return 1;
-    } else if (getGameResult(supposedScore) == 'D' && getGameResult(realScore) == 'D')  {
+    } else if (supposedScoreGameResult === 'D' && realScoreGameResult === 'D')  {
         return 1;
     } else {
         return 2;
