@@ -8,49 +8,55 @@
 
 // Примеры:
 // [“1 : 2”, “3 : 2”] => 0
-
 // [“2 : 1”, “1 : 2”] => 0 
 // [“5 : 4”, “1 : 1”] => 0 
-
 // [“1 : 2”, “2 : 3”] => 1
-
 // [“3 : 2”, “5 : 2”] => 1
 // [“2 : 2”, “3 : 3”] => 1
-
 // [“2 : 2”, “2 : 2”] => 2
 // [“3 : 2”, “3 : 2”] => 2
 
-const score = ['1 : 2', '3 : 2'];
-// console.log(score[0]);
+const score = ['5 : 4', '1 : 1'];
 
-function guessScore(scope) { // принимаем две функции предсказанный счет, реальный счет
-    // const predictedScore = scope[0].replace(/\s+/g, '').split(''); // [ '1', ':', '2' ] 
-    // const realAccount = scope[1].replace(/\s+/g, '').split(''); // [ '3', ':', '2' ]
+function calculatePrize(input) { // ['2 : 1', '5 : 1']
+    const supposedScore = input[0]; // '2 : 1' 2-A
+    const realScore = input[1]; // '5 : 1'
 
-    const a1 = scope[0].replace(/\s+/g, '').split('')[0]; // [1]
-    const a2 = scope[0].replace(/\s+/g, '').split('')[2]; // [2]
-
-    const b1 = scope[1].replace(/\s+/g, '').split('')[0]; // [3]
-    const b2 = scope[1].replace(/\s+/g, '').split('')[2]; // [4]
-
-
-    if (a1 && a2 == b1 && b2) {
-        console.log('3');
+    if (supposedScore == realScore) {
+        return 2;
+    } else if (getGameResult(supposedScore) == 'B' && getGameResult(realScore) == 'A')  {
+        return 0;
+    } else if (getGameResult(supposedScore) == 'A' && getGameResult(realScore) == 'B')  {
+        return 0;
+    } else if (getGameResult(supposedScore) == 'A' && getGameResult(realScore) == 'D')  {
+        return 0;
+    } else if (getGameResult(supposedScore) == 'B' && getGameResult(realScore) == 'B')  {
+        return 1;
+    } else if (getGameResult(supposedScore) == 'A' && getGameResult(realScore) == 'A')  {
+        return 1;
+    } else if (getGameResult(supposedScore) == 'D' && getGameResult(realScore) == 'D')  {
+        return 1;
+    } else {
+        return 2;
     }
-
-    console.log(a1, a2, b1, b2);
-
-    // в разработке
 }
 
-guessScore(score);
+console.log(calculatePrize(score));
 
+function getGameResult(score) { // узнаем какая команда выигрывает
+    const scoreByTeam = score.split(':');
+    const scoreA = parseInt(scoreByTeam[0], 10); // STRING  num - 2
+    const scoreB = parseInt(scoreByTeam[1], 10);  // STRING num - 1
 
-// [“1 : 2”, “3 : 2”] => 0 
-// [“2 : 1”, “1 : 2”] => 0 
-// [“5 : 4”, “1 : 1”] => 0 
-// [“1 : 2”, “2 : 3”] => 1
-// [“3 : 2”, “5 : 2”] => 1
-// [“2 : 2”, “3 : 3”] => 1
-// [“2 : 2”, “2 : 2”] => 2
-// [“3 : 2”, “3 : 2”] => 2
+    if (scoreA > scoreB) {
+        return 'A';
+    } else if (scoreA < scoreB) {
+        return 'B';
+    } else {
+        return 'D';
+    }
+}
+
+// console.log(getGameResult('2 : 1'));
+// console.log(getGameResult('2 : 2'));
+
