@@ -5,10 +5,28 @@ const incompleteArray = [1, 2, 3, 4, 5, 6, 8]; // массив с недоста
 const N = incompleteArray[incompleteArray.length - 1]; // получение N
 const fullArray = Array.from(Array(N), (_, i) => i + 1); // массив от [1.....N]
 
+
+const g = [...new Set([incompleteArray, fullArray])];
+console.log(g);
+
+
+function diff(aString, nString) {
+    if (aString !== nString) {
+        aString.forEach(element => {
+            console.log(element);
+        });
+    }
+    
+
+}
+
+
 function diff(aString, nString) {
     return aString.filter(i => !nString.includes(i))
     .concat(nString.filter(i => !aString.includes(i)))
 }
+
+
 
 console.log(diff(incompleteArray, fullArray));
 

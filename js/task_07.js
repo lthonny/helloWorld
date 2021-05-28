@@ -28,26 +28,18 @@ function calculatePrize(input) { // ['2 : 1', '5 : 1']
     const supposedScoreGameResult = getGameResult(supposedScore);
     const realScoreGameResult = getGameResult(realScore)
 
-    if (supposedScore == realScore) {
+    if (supposedScore === realScore) {
         return 2;
-    } else if (supposedScoreGameResult === 'B' && realScoreGameResult === 'A')  {
-        return 0;
-    } else if (supposedScoreGameResult === 'A' && realScoreGameResult === 'B')  {
-        return 0;
-    } else if (supposedScoreGameResult === 'A' && realScoreGameResult === 'D')  {
-        return 0;
-    } else if (supposedScoreGameResult === 'B' && realScoreGameResult === 'B')  {
+    } 
+    // no max reward
+
+    if (supposedScoreGameResult === realScoreGameResult ) {
         return 1;
-    } else if (supposedScoreGameResult === 'A' && realScoreGameResult ==='A')  {
-        return 1;
-    } else if (supposedScoreGameResult === 'D' && realScoreGameResult === 'D')  {
-        return 1;
-    } else {
-        return 2;
-    }
+    } 
+
+    return 0;   
 }
 
-console.log(calculatePrize(score));
 
 function getGameResult(score) { // узнаем какая команда выигрывает
     const scoreByTeam = score.split(':');
@@ -63,4 +55,21 @@ function getGameResult(score) { // узнаем какая команда выи
     }
 }
 
+const testCases = [
+    {input: ['1 : 2', '3 : 2'], output: 0},
+    {input: ['2 : 1', '1 : 2'], output: 0},
+    {input: ['5 : 4', '1 : 1'], output: 0},
+    {input: ['1 : 2', '2 : 3'], output: 1},
+    {input: ['3 : 2', '5 : 2'], output: 1},
+    {input: ['2 : 2', '3 : 3'], output: 1},
+    {input: ['2 : 2', '2 : 2'], output: 2},
+    {input: ['3 : 2', '3 : 2'], output: 2},
+];
 
+testCases.forEach((testCase) => {
+    const {input, output} = testCase;
+    const realOutput = calculatePrize(input);
+    console.log(`
+    input: ${input} test result: ${realOutput} - ${output}
+    `);
+})
