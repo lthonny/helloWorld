@@ -28,7 +28,7 @@ accumObj(arrNumber1);
 
 
 
-// optimized
+// optimized 1
 
 const singleNumber = function(nums) {
     let uniq = new Set(); // save no repeat numbers
@@ -46,6 +46,38 @@ const singleNumber = function(nums) {
     }
     return uniqSum * 2 - numSum;
 };
+
+// test cases
+const testCases = [
+    { input: [1, 1, 2, 2, 3]},
+    { input: [4, 3, 2, 2, 3, 5, 5]},
+    { input: [4, 1, 0, 1, 3, 4, 3]},
+    { input: [9, 1, 2, 9, 3, 4, 3, 2, 1, 5, 5]},
+    { input: [5, 1, 1, 2, 2, 4, 8, 4, 3, 3, 5]},
+];
+
+testCases.forEach((testCase) => {
+    const {input} = testCase;
+    const noRepeatNumber = singleNumber(input);
+    console.log(`
+        input: ${input} no repeat result: ${noRepeatNumber};
+    `);
+})
+
+
+
+// optimized 2
+
+const singleNumber = function(nums) {
+    let uniq = Array.from(new Set(nums)); // no repeat numbers
+    let reduceSum = (s, i) => s + i;
+
+    let uniqSum = uniq.reduce(reduceSum); // sum no repeat numbers
+    let numSum = nums.reduce(reduceSum); // sum all numbers
+    
+    return uniqSum * 2 - numSum;
+};
+
 
 // test cases
 const testCases = [
